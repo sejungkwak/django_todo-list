@@ -4,6 +4,8 @@ from .models import Todo
 
 def index(request):
 
+    todo = Todo.objects.all()
+
     if request.method == 'POST':
         new_todo = Todo(
             title = request.POST['title']
@@ -11,4 +13,4 @@ def index(request):
         new_todo.save()
         return redirect('/')
 
-    return render(request, 'index.html')
+    return render(request, 'index.html', {'todos': todo})
